@@ -23,7 +23,7 @@ Run from the command line:
 
 ```bash
 python python_script.py <input_file> <k> <output_file>~
-
+```
 Example: python python_script.py sample_input.txt 3 results.txt
 
 Parameters:
@@ -35,9 +35,11 @@ Parameters:
 
 Run from the command line:
 ```bash pytest
+```
 Expected output: collected 11 items; 11 passed
 To see detailed outputs:
-```bash pytest -v 
+```bash pytest -v
+``` 
 
 ## Remember to add dataset files so the script can fully run.
 
