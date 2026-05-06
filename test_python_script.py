@@ -81,3 +81,38 @@ def test_count_kmers_with_context():
 
     assert "AT" in result
     assert result["AT"]["next_chars"]["G"] == 1
+    
+def test_empty_sequence():
+    """
+    Empty sequence should produce no k-mers.
+    """
+    data = {}
+    result = ps.count_kmers_with_context("", 2, data)
+    assert result == {}
+    
+def test_sequence_too_short_for_k():
+    """
+    Sequence too short should produce no k-mer counts.
+    """
+    data = {}
+    result = ps.count_kmers_with_context("A", 2, data)
+    assert result == {}
+    
+def test_k_equals_one():
+    """
+    k=1 should still correctly track single-base k-mers.
+    """
+    data = {}
+    result = ps.count_kmers_with_context("AT", 1, data)
+
+    assert "A" in result
+    assert result["A"]["next_chars"]["T"] == 1
+
+def test_repeated_sequence():
+    """
+    Repeated nucleotides should accumulate counts correctly.
+    """
+    data = {}
+    ps.count_kmers_with_context("AAAA", 1, data)
+
+    assert data["A"]["count"] == 3
