@@ -10,7 +10,7 @@ This follows a test-driven development (TDD) approach.
 """
 
 import python_script as ps
-
+import os
 
 # TEST: validate_sequence
 
@@ -116,8 +116,6 @@ def test_repeated_sequence():
     ps.count_kmers_with_context("AAAA", 1, data)
 
     assert data["A"]["count"] == 3
-
-import os
 
 
 def test_write_results_to_file(tmp_path):
