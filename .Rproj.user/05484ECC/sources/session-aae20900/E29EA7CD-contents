@@ -1,19 +1,45 @@
-import sys # command line arguments read
+import sys # command line to read
 
+# explain what valid DNA nucleotides are
 def validate_sequence(sequence, k):
-    # explain what valid DNA nucleotides are
+    """
+    Validates a DNA sequence for k-mer analysis.
+
+    A valid sequence must:
+    - contain only A, C, G, T characters
+    - be at least length k + 1
+
+    Parameters:
+        sequence (str): DNA sequence
+        k (int): k-mer size
+
+    Returns:
+        bool: True if valid, False otherwise
+    """
     valid_bases = set("ACGT")  # only valid DNA bases
 
-    # sequence must be long enough for k-mer + next character
+    # sequence must be long enough for k-mer and next character
     if len(sequence) < k + 1:
         return False
 
-    # ensure every character is a valid DNA base
+    # checks characters are a valid DNA base
     return all(base in valid_bases for base in sequence)
 
 def update_kmer_count(kmer_data, kmer, next_char):
     # if this k-mer is not yet in the dictionary, initialize its structure
-    if kmer not in kmer_data:
+    """
+    Updates frequency counts for a k-mer and its following character.
+
+    Parameters:
+        kmer_data (dict): dictionary storing all k-mer statistics
+        kmer (str): current k-mer
+        next_char (str): character following the k-mer
+
+    Returns:
+        dict: updated k-mer data structure
+    """
+
+    if kmer not in kmer_data: #starts k-mer if not seen yet
         kmer_data[kmer] = {
             "count": 0,          
             # total number of times k-mer appears
@@ -24,7 +50,7 @@ def update_kmer_count(kmer_data, kmer, next_char):
     # increment total occurrence count of this k-mer
     kmer_data[kmer]["count"] += 1
 
-    # if this next character has not been seen before for this k-mer, initialize it
+    # if this next character has not been seen before for this k-mer, initialize it if needed
     if next_char not in kmer_data[kmer]["next_chars"]:
         kmer_data[kmer]["next_chars"][next_char] = 0
 
@@ -36,9 +62,21 @@ def update_kmer_count(kmer_data, kmer, next_char):
 
 def count_kmers_with_context(sequence, k, kmer_data):
     # loop through sequence, stopping so that k-mer and next character is valid
-    for i in range(len(sequence) - k):
+    """
+    Extracts k-mers from a sequence and tracks the character that follows each k-mer.
 
-        # extract k-mer substring
+    Parameters:
+        sequence (str): DNA sequence
+        k (int): k-mer size
+        kmer_data (dict): dictionary storing k-mer statistics
+
+    Returns:
+        dict: updated k-mer data
+    """
+
+    for i in range(len(sequence) - k): #loop through sequence to extract k-mers
+
+        # extract k-mer
         kmer = sequence[i:i + k]
 
         # get the character immediately after the k-mer
@@ -51,6 +89,17 @@ def count_kmers_with_context(sequence, k, kmer_data):
     return kmer_data
 
 def write_results_to_file(kmer_data, output_filename):
+    """
+    Writes k-mer frequency results to an output file.
+
+    Parameters:
+        kmer_data (dict): k-mer statistics dictionary
+        output_filename (str): file to write results to
+
+    Returns:
+        None
+    """
+
     # sort k-mers alphabetically for consistent output
     sorted_kmers = sorted(kmer_data.keys())
 
@@ -73,6 +122,13 @@ def write_results_to_file(kmer_data, output_filename):
             f.write(f"{kmer} {kmer_data[kmer]['count']} {next_char_str}\n")
 
 def main():
+    """
+    Main function to run k-mer analysis from command line input.
+
+    Usage:
+        python python_script.py <input_file> <k> <output_file>
+    """
+
     # First command-line argument: input file with sequences
     sequence_file = sys.argv[1]
 
