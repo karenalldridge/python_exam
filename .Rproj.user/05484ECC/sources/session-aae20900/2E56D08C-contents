@@ -116,3 +116,30 @@ def test_repeated_sequence():
     ps.count_kmers_with_context("AAAA", 1, data)
 
     assert data["A"]["count"] == 3
+
+import os
+
+
+def test_write_results_to_file(tmp_path):
+    """
+    Test that output file is created and written correctly.
+    """
+    data = {
+        "AT": {
+            "count": 2,
+            "next_chars": {"G": 2}
+        }
+    }
+
+    output_file = tmp_path / "output.txt"
+
+    ps.write_results_to_file(data, str(output_file))
+
+    assert os.path.exists(output_file)
+
+    with open(output_file, "r") as f:
+        content = f.read()
+
+    assert "AT" in content
+    assert "2" in content
+    assert "G:2" in content
