@@ -34,11 +34,13 @@ Parameters:
 ## How to run tests
 
 Run from the command line:
-```bash pytest
+```bash
+pytest
 ```
 Expected output: collected 11 items; 11 passed
 To see detailed outputs:
-```bash pytest -v
+```bash
+pytest -v
 ``` 
 
 ## Remember to add dataset files so the script can fully run.
