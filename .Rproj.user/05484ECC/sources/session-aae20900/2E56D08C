@@ -1,27 +1,27 @@
 {
-    "id": "E29EA7CD",
-    "path": "~/python_exam/python_script.py",
-    "project_path": "python_script.py",
+    "id": "2E56D08C",
+    "path": "~/python_exam/test_python_script.py",
+    "project_path": "test_python_script.py",
     "type": "python",
-    "hash": "3473016303",
+    "hash": "0",
     "contents": "",
     "dirty": false,
-    "created": 1777911398206.0,
+    "created": 1778079786351.0,
     "source_on_save": false,
-    "relative_order": 1,
+    "relative_order": 2,
     "properties": {
         "tempName": "Untitled1",
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "78,17",
-        "scrollLine": "73"
+        "cursorPosition": "29,0",
+        "scrollLine": "0"
     },
     "folds": "",
-    "lastKnownWriteTime": 1778079633,
+    "lastKnownWriteTime": 1778080191,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1778079633844,
+    "last_content_update": 1778080191414,
     "read_only": false,
     "read_only_alternatives": []
 }
